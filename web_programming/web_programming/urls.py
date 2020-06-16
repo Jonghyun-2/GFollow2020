@@ -15,11 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-import myapp01.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', myapp01.views.home, name="home"),
-    path('upload_img/', myapp01.views.upload_img, name="upload_img"),
-
 ]
