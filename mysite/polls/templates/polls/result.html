@@ -9,7 +9,7 @@
 
 <ul>
     {% for choice in question.choice_set.all %}
-        <il>{{ choice.C_text}} - {{choice.votes}} vote{{choice.votes|pluralize }}</il>
+        <il>{{ choice.C_text}} - {{choice.votes}} vote{{choice.votes|pluralize }}</il><br />
     {% endfor %}
 </ul>
 

@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from polls.models import Choice,Question
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+
+from polls.models import Choice,Question
 # Create your views here.
 
 # view 함수 정의
@@ -21,7 +22,7 @@ def vote(request, question_id):
     try:
         select_choice = question.choice_set.get(pk=request.POST['choice'])
     except(KeyError, Choice.DoesNotExist):
-        return render(request, 'polls/detail.html',{
+        return render(request, 'polls/detail.html', {
             'question': question,
             'error_message': "you didn't select a choice",
         })
@@ -30,7 +31,7 @@ def vote(request, question_id):
         select_choice.votes += 1
         select_choice.save()
 
-        return HttpResponseRedirect(reverse('polls:results', args =(question.id,)))
+        return HttpResponseRedirect(reverse('polls:result', args =(question.id,)))
 
 def result(request, question_id):
     question = get_object_or_404(Question,pk=question_id)
