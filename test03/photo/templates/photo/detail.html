@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{object.text|truncatechars:10}} <!-- 문자열을 지정 글자갯수까지 줄이며, 줄여질 경우 끝 에 "..."를 추가 -->
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 panel panel-default">
+            <p><img src="{{object.photo.url}}" style="width:100%;"></p>
+            <button type="button" class="btn btn-outline-primary btn-sm">
+                {{object.author.username}} <!-- 2044smile -->
+            </button>
+            <p>{{object.text|linebreaksbr}}</p>
+            <!-- HTML은 기본적으로 공백문자를 인식하지 못하는데 linebreaksbr 필터를 사용하면 줄바꿈이 일어나는 곳에 <br> 태그를 추가! -->
+            <a href="{% url 'photo:photo_delete' pk=object.id %}" class="btn btn-outline-danger btn-sm float-right">
+                Delete
+            </a>
+            <a href="{% url 'photo:photo_update' pk=object.id %}" class="btn btn-outline-danger btn-sm float-right">
+                Update
+            </a>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+{% endblock%}

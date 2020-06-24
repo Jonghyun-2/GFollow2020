@@ -1,0 +1,26 @@
+<!--photo/templates/photo/list.html-->
+{% extends 'base.html' %}
+
+{% block title %}- List{% endblock %}
+
+{% block content %}
+{% for post in photos %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 panel panel-default">
+        <!-- 이부분때문에 깨진 화면 출력 -->
+        <p><img src="{{post.photo.url}}" style="width:50%;" alt="Image Error"></p>
+        <!--<p><img src="../../../media/photos/2020/06/23/Calc-Test_P_00038_RIGHT_CC_1_mask.png" style="width:50%;" alt="Image Error"></p> -->
+        <p>{{post.photo.url}}</p>
+        <p>{{post.text|linebreaksbr}}</p>
+        <p class="text-right">
+            <button type="button" class="btn btn-xs btn-info">
+                {{post.author.username}}
+            </button>
+            <a href="{% url 'photo:photo_diagnosis' pk=post.id %}" class="btn btn-xs btn-success">Diagnosis</a>
+        </p>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endfor %}
+{% endblock %}
