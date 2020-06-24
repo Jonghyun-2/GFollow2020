@@ -21,6 +21,7 @@ class Photo(models.Model):
     photo = models.ImageField(upload_to=r'./photos',
                               default=r'photos/no_image.png')
     # upload_to 는 사진이 업로드 될 경로를 설정한다. 만약 업로드가 되지 않을 경우 default 값으로 대체.
+    dcm = models.FileField()
     text = models.TextField()
     # 텍스트 필드, 문자열 길이 제한 X
     created = models.DateTimeField(auto_now_add=True)

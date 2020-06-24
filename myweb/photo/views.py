@@ -11,7 +11,7 @@ from .models import Photo
 
 class PhotoUploadView(CreateView):  # CreateView 를 PhotoUploadView가 상속받는다.
     model = Photo
-    fields = ['photo', 'text']
+    fields = ['photo', 'dcm', 'text']
     template_name = 'photo/upload.html'  # 클래스 변수 생성, 이 변수는 실제 사용할 템플릿을 설정한다.
 
     def form_valid(self, form):  # 업로드를 끝내고 이동할 페이지를 호출하기 위해 사용하는 메서드
@@ -28,8 +28,8 @@ class PhotoUploadView(CreateView):  # CreateView 를 PhotoUploadView가 상속�
 
 def photo_list(request):
     photos = Photo.objects.all()  # 데이터베이스에 저장 된 모든 사진을 불러온다.
-    for a in photos.values_list():
-        print(a)
+    # for a in photos.values_list():
+    #     print(a)
     return render(request, 'photo/list.html', {'photos': photos})
 # 템플릿과 뷰를 연동하기 위해서 render 함수를 사용한다.
 # render 함수는 첫 번째 인자로 request
@@ -48,7 +48,10 @@ class PhotoUpdateView(UpdateView):  # 제네릭 뷰 UpdateView를 사용하기 �
     fields = ['photo', 'text']
     template_name = 'photo/update.html'
 
+
 class PhotoDiagnosisView(DetailView):  # DetailView 를 PhotoDiagnosis 상속받는다.
     model = Photo
+    photos = Photo.objects.all()
     fields = ['photo', 'text']
-    template_name = 'photo/diagnosis.html'  # 클래스 변수 생성, 이 변수는 실제 사용할 템플릿을 설정한다.
+    # 클래스 변수 생성, 이 변수는 실제 사용할 템플릿을 설정한다.
+    template_name = 'photo/diagnosis.html'

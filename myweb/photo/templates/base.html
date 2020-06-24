@@ -19,23 +19,40 @@
     <title>Mammography Detection {% block title %}{% endblock %}</title>
 </head>
 
+
 <body>
 
+    <style type="text/css">
+        #s_right {
+            width: 200px;
+            height: 700px;
+            float: right;
+            background-color: yellow;
+        }
+    </style>
+
     <div class="container">
+
         <header class="header clearfix">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="/">Mammography Detection</a>
                 <ul class="nav">
                     <li class="nav-item"><a href="/" class="active nav-link ">Home</a></li>
-                    
+
                     <li class="nav-item"><a href="#" class="nav-link">Welcome!</a></li>
                     <!-- 'photo:photo_upload' = urls.photo_upload 함수와 연결 -->
                     <li class="nav-item"><a href="{% url 'photo:photo_upload' %}" class="nav-link">Upload</a></li>
                 </ul>
             </nav>
         </header>
+        <div id="s_right">
+            {% block items %}
+            {% endblock %}
+        </div>
         {% block content %}
         {% endblock %}
+
+
 
         <footer class="footer">
             <p>&copy; Hyun </p>
@@ -43,6 +60,9 @@
     </div>
 
 
+
 </body>
+
+
 
 </html>
