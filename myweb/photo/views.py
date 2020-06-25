@@ -11,7 +11,7 @@ from .models import Photo
 
 class PhotoUploadView(CreateView):  # CreateView 를 PhotoUploadView가 상속받는다.
     model = Photo
-    fields = ['photo', 'dcm', 'text','files']
+    fields = ['photo', 'text']
     template_name = 'photo/upload.html'  # 클래스 변수 생성, 이 변수는 실제 사용할 템플릿을 설정한다.
 
     def form_valid(self, form):  # 업로드를 끝내고 이동할 페이지를 호출하기 위해 사용하는 메서드

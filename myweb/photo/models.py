@@ -4,6 +4,7 @@ from django.contrib.auth.models import User  # 가져온 User를 class Photo 에
 from django.conf import settings
 import os
 
+
 class Photo(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='user_photos')
@@ -32,11 +33,11 @@ class Photo(models.Model):
     # 글 수정 일을 저장하기 위한 날짜시간 필드이다. auto_now 옵션을 설정하면 객체가 수정 될 때 마다 자동으로 값을 설정한다.
 
     # FileField로 입력받기
-    dcm = models.FileField(upload_to=r'./photos',
-                              default=r'photos/no_image.png')
+    # dcm = models.FileField(upload_to=r'./photos',
+    #                          default=r'photos/no_image.png')
 
     # FilePath로 입력받기
-    files = models.FilePathField(path="photo/")
+    # files = models.FilePathField(path="photo/")
 
     class Meta:  # 옵션 클래스
         ordering = ['-updated']
