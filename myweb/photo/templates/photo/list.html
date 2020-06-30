@@ -8,9 +8,13 @@
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8 panel panel-default">
-        <!-- 이부분때문에 깨진 화면 출력 -->
         <p><img src="{{post.photo.url}}" style="width:50%;" alt="Image Error"></p>
+        <p><img src="{{imgs}}" style="width:50%;" alt="Image Error"></p>
         <p>{{post.photo.url}}</p>
+        <p>{{post.photo}}</p>
+        <p>{{post.created}}</p>
+        <p>{{imgs}}</p>
+
         <p>{{post.text|linebreaksbr}}</p>
         <p class="text-right">
             <button type="button" class="btn btn-xs btn-info">

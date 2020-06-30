@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}- Predict{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 panel panel-default">
+        <p>Input Image</p>
+        <p><img src="{{object.photo.url}}" alt="No image" style="width:50%;"></p>
+        <p>Predcition Image</p>
+        <p><img src="{{object.img}}" alt="No image" style="width:100%;"></p>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock%}

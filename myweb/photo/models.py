@@ -3,6 +3,10 @@ from django.urls import reverse
 from django.contrib.auth.models import User  # 가져온 User를 class Photo 에서 사용
 from django.conf import settings
 import os
+import numpy as np
+import cv2 as cv
+from PIL import Image
+
 
 class Photo(models.Model):
     author = models.ForeignKey(
@@ -30,13 +34,11 @@ class Photo(models.Model):
     # 한마디로 게시글이 작성될 때의 시간을 갖고 upload_to 의 경로에 맞게끔 값을 넣어준다.
     updated = models.DateTimeField(auto_now=True)
     # 글 수정 일을 저장하기 위한 날짜시간 필드이다. auto_now 옵션을 설정하면 객체가 수정 될 때 마다 자동으로 값을 설정한다.
-
     # FileField로 입력받기
-    dcm = models.FileField(upload_to=r'./photos',
-                              default=r'photos/no_image.png')
-
+    # dcm = models.FileField(upload_to=r'./photos',
+    #                          default=r'photos/no_image.png')
     # FilePath로 입력받기
-    files = models.FilePathField(path="photo/")
+    # files = models.FilePathField(path="photo/")
 
     class Meta:  # 옵션 클래스
         ordering = ['-updated']
@@ -53,11 +55,3 @@ class Photo(models.Model):
     # 객체를 수정했을 때 이동할 주소를 위해 호출되기도 하고 템플릿에서 상세 화면으로 이동하는
     # 링크를 만들 때 호출하기도 합니다. 이런 주소를 만들기 위해서는 reverse 메서드를 사용하는데
     # reverse 메서드는 URL 패턴 이름을 가지고 해당 패턴을 찾아 주소를 만들어주는 함수이다.
-
-# 파일 업로드를 위한 함수 및 클래스
-
-# def images_path():
-#     return os.path.join(settings.MEDIA_ROOT,'*.PNG')
-
-# class Upload_Multi_File(models.Model):
-#     file = models.FilePathField(path=images_path)
