@@ -4,14 +4,35 @@
     <h1>For Test</h1>
     <script src="./base.js"></script>
     <script>
-        function change_func(input_data){
+        function change_func(input_data) {
             age = input_data;
-            document.write("after change : ",age)
+            alert("before change : " + input_data + " After change :" + age);
         }
+    </script>
+
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        function runUpload(input_data) {
+            $.ajax({
+                url: "./base.py",
+                data: input_data,
+                type: 'POST',
+                success: function () {
+                    document.write("hi");
+                    alert('success!');
+                },
+
+                error: function (request, status, error) {
+                    alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                }
+            })
+        };
+
     </script>
 </head>
 
 <body>
     <br>
-    <button type="button" onclick="change_func(50)">click</button>
+    <button type="button" onclick="runUpload(50)">ajax test</button>
+    <input type="file" id="myfile" name="myfile" multiple>
 </body>
