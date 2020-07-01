@@ -1,72 +1,96 @@
-<script src="https://d10ajoocuyu32n.cloudfront.net/jquery-1.9.1.min.js"></script>
+<div id="text_area">
+    <h1>Test Page</h1>
+</div>
 
-<script type="text/javascript">
-
-    $(document).on("click", "#id_a", function () {
-
-        var c_data = {};
-
-        c_data['click'] = 'a';
-
-        $.ajax({
-
-            url: ".",
-
-            dataType: "json",
-
-            data: c_data
-
-        }).done(function (msg) {
-
-            $("#text_area").append("done : " + msg['message'] + "<_br />");
-
-        });
-
-    });
-
-</script>
-
-<script type="text/javascript">
-
-    $(document).on("click", "#id_a", function () {
-
-        var c_data = {};
-
-        c_data['click'] = 'a';
-
-        $.ajax({
-
-            url: ".",
-
-            dataType: "json",
-
-            data: c_data,
-            success: alert('success'),
-
-        }).done(function (msg) {
-
-            $("#text_area").append("done : " + msg['message'] + "<_br />");
-
-        });
-
-    });
-
-</script>
+<!-- 이미지 경로 입력 -->
+<input id='path' type="file" multiple>
 
 
+<!-- 이미지 경로 입력한거 확인-->
+<!-- 여기있는 URL사용해서 이미지 불러오기-->
+<button id="check">
+    Check
+</button>
 
+<!-- 입력을 받은후 이미지를 출력-->
 <button id="id_a">
+    Output
+</button>
 
-    Predict
-
+<button id="python_test">
+    test
 </button>
 
 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-<div id="text_area">
+<script type="text/javascript">
+    //click 이벤트 발생시, id_a 영역에 function(void) 실행
+    $(document).on("click", "#id_a", function () { //만약 ID를 통해 불러오고 싶으면?
+        //변수 선언
+        var c_data = {};
+        //c_data의 click event는 'a'의 value를 가짐
+        c_data['click'] = 'a';
 
-    Text Area<br>
+        $.ajax({
+            //type : 'GET','POST', 'DELETE', 'PUT'
+            url: ".",
 
+            dataType: "json", //
 
+            data: c_data,
 
-</div>
+            success: function () { alert('success') },
+
+        }).done(function (a) { // 완료시 작동되는 function (a)는 request를 통해 들어온 Data
+
+            $("#text_area").append("done : " + a['message'] + "<_br />");
+
+        });
+
+    });
+
+</script>
+
+<script type="text/javascript">
+    $(document).on("click", "#python_test", function () {
+        var c_data = {};
+
+        c_data['click'] = 'a';
+        $.ajax({
+
+            url: "./test.py",
+            data: c_data,
+            //success: function () { alert('success') },
+            error: function () { alert('fail') },
+
+        }).done(function (msg) {
+
+            $("#text_area").append("clicked : " + msg['message'] + "<_br />");
+
+        });
+
+    });
+
+</script>
+
+<script type="text/javascript">
+    $(document).on("click", "#check", function () {
+        var c_data = {};
+        var temp = document.getElementById('path').value;
+        c_data['click'] = temp;
+        $.ajax({
+            url: "./test.py",
+            data: c_data,
+            //success: function () { alert('success') },
+            error: function () { alert('fail') },
+
+        }).done(function (paths) {
+
+            $("#text_area").append("Paths : " + paths['paths'] + "<br>");
+
+        });
+
+    });
+
+</script>
