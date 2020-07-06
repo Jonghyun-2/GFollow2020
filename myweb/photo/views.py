@@ -32,13 +32,8 @@ class PhotoUploadView(CreateView):  # CreateView 를 PhotoUploadView가 상속�
 
 def photo_list(request):
     photos = Photo.objects.all()  # 데이터베이스에 저장 된 모든 사진을 불러온다.
-    imgs = cv.imread(r'D:\\test.jpg')
 
-    img = Image.fromarray(imgs, 'RGB')
-
-    # for a in photos.values_list():
-    #     print(a)
-    return render(request, 'photo/list.html', {'photos': photos, 'imgs': img})
+    return render(request, 'photo/list.html', {'photos': photos})
 # 템플릿과 뷰를 연동하기 위해서 render 함수를 사용한다.
 # render 함수는 첫 번째 인자로 request
 # 두 번째 인자는 랜더링 할 템플릿
@@ -70,6 +65,52 @@ class PhotoPredictView(DetailView):  # DetailView 를 PhotoPredict에 상속받�
     model = Photo
     photos = Photo.objects.all()
     fields = ['photo', 'text']
-    print("Predict Called")
     # 클래스 변수 생성, 이 변수는 실제 사용할 템플릿을 설정한다.
     template_name = 'photo/predict.html'
+
+
+def output_view(request, pk):
+    photos = Photo.objects.get(pk=pk)  # 데이터베이스에 저장 된 모든 사진을 불러온다.
+#    if request.is_ajax():
+
+#        data = request.GET['click']
+#        print(data)
+    # sth function
+    # ex print_hello
+
+    # 이미지 입력
+    # 이미지의 URL로 입력 받음
+    # img = cv.imread(r'E:\Input_test\test.jpg')
+
+    # 딥러닝 모델을 통한 결과 측정
+    # pred = model_predict_value(img)
+
+    # 이미지 출력
+    # cv.imwrite(r'E:\Output_test\output.jpg', img)
+    # message(key) , data(value)
+#        return HttpResponse(json.dumps({'paths': data}), 'application/json')
+    return render(request, 'photo/predict.html', {'photos': photos})
+
+
+def ajaxTest(request):
+
+    if request.is_ajax():
+
+        data = request.GET['click']
+        print(data)
+        # sth function
+        # ex print_hello
+
+        # 이미지 입력
+        # 이미지의 URL로 입력 받음
+        # img = cv.imread(r'E:\Input_test\test.jpg')
+
+        # 딥러닝 모델을 통한 결과 측정
+        # pred = model_predict_value(img)
+
+        # 이미지 출력
+        # cv.imwrite(r'E:\Output_test\output.jpg', img)
+        # message(key) , data(value)
+        return HttpResponse(json.dumps({'paths': data}), 'application/json')
+
+    return render(request, 'diagnosis.html')

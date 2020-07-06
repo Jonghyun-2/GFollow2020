@@ -6,10 +6,48 @@
     <div class="col-md-2"></div>
     <div class="col-md-8 panel panel-default">
         <p>Input Image</p>
-        <p><img src="{{object.photo.url}}" alt="No image" style="width:50%;"></p>
-        <p>Predcition Image</p>
-        <p><img src="{{object.img}}" alt="No image" style="width:100%;"></p>
+        <p><img src="{{photos.photo.url}}" alt="No image" style="width:50%;"></p>
+        <button id="test">aaaa</button>
     </div>
     <div class="col-md-2"></div>
 </div>
 {% endblock%}
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    // //click 이벤트 발생시, id_a 영역에 function(void) 실행
+    // $(document).on("click", "#test", function () { //만약 ID를 통해 불러오고 싶으면?
+    //     //변수 선언
+    //     var c_data = {};
+    //     //c_data의 click event는 'a'의 value를 가짐
+    //     c_data['click'] = 'a';
+
+    //     $.ajax({
+    //         //type : 'GET','POST', 'DELETE', 'PUT'
+    //         type: 'GET',
+    //         url: ".",
+
+    //         dataType: "json", //
+
+    //         data: c_data,
+
+    //         success: function () { alert('success') },
+    //         error: function (request, status, error) { alert("code: " + request.status + "\n" + "message: " + request.responseText + "\n" + "error: " + error); }
+
+    //     })
+    //         .done(function (a) { // 완료시 작동되는 function (a)는 request를 통해 들어온 Data
+
+    //             $("#text_area").append("done : " + a['message'] + "<_br />");
+
+    //         });
+
+    // });
+    $(document).ready(function () {
+        $('#test').click(function () {
+            alert('hi!');
+        });
+    });
+
+
+</script>

@@ -18,7 +18,6 @@ urlpatterns = [
     path('delete/<int:pk>/', PhotoDeleteView.as_view(), name='photo_delete'),
     path('update/<int:pk>/', PhotoUpdateView.as_view(), name='photo_update'),
     path('diagnosis/<int:pk>/', PhotoDiagnosisView.as_view(), name='photo_diagnosis'),
-    path('diagnosis/<int:pk>/predict',
-         PhotoPredictView.as_view(), name='photo_predict'),
+    path('diagnosis/<int:pk>/predict', output_view, name='photo_predict'),
     # 함수 형 뷰는 뷰 이름만 써주고 클래스(class) 형 뷰는 뒤에 .as_view()를 붙인다.
 ]
