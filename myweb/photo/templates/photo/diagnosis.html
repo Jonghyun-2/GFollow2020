@@ -1,29 +1,9 @@
 <!--photo/templates/photo/list.html-->
 {% extends 'base.html' %}
 
-{% block title %}- Diagonosis{% endblock %}
+{% block title %}- Diagnosis{% endblock %}
 
 
-{% block items %}
-<form>
-    <script>
-        function test(name, age) {
-            document.write(name);
-            document.write(age);
-        }
-    </script>
-    <select id="items" size='10' style="width: 200px;">
-        <option value="{{object.photo.url}}">{{object.photo.url}}</option>
-        <option>test02</option>
-        <option>test03</option>
-        <option>test04</option>
-    </select>
-</form>
-<p></p>
-<input type="button" value="이미지 변경" onclick="test('aa','bb')">
-<button type="submit" onclick="alert('이미지 경로 지정')">이미지 출력</button>
-<button type="submit" onclick="alert('다이콤 경로 지정')">다이콤 출력</button>
-{% endblock%}
 
 <!--중앙의 Contents가 되는 부분-->
 {% block content %}
@@ -31,7 +11,7 @@
     <div class="col-md-2"></div>
     <div class="col-md-8 panel panel-default">
         <!--이미지 출력및 Description 출력-->
-        <p><img src="{{object.photo.url}}" alt="No image" style="width:100%;"></p>
+        <p><img src="{{object.photo.url}}" alt="No image" style="width:50%;"></p>
         <p>{{items.value}}</p>
         <p>{{object.photo.url}}</p>
         <p>{{object.text|linebreaksbr}}</p>

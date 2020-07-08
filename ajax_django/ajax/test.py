@@ -80,3 +80,6 @@ def prediction(model, image):
 
 def print_hello():
     print('hello world!')
+
+
+print("test.py called")

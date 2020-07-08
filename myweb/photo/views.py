@@ -5,6 +5,8 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
 from django.shortcuts import redirect
+from django.http import HttpResponse
+import json
 
 from .models import Photo
 import cv2 as cv
@@ -71,46 +73,9 @@ class PhotoPredictView(DetailView):  # DetailView 를 PhotoPredict에 상속받�
 
 def output_view(request, pk):
     photos = Photo.objects.get(pk=pk)  # 데이터베이스에 저장 된 모든 사진을 불러온다.
-#    if request.is_ajax():
-
-#        data = request.GET['click']
-#        print(data)
-    # sth function
-    # ex print_hello
-
-    # 이미지 입력
-    # 이미지의 URL로 입력 받음
-    # img = cv.imread(r'E:\Input_test\test.jpg')
-
-    # 딥러닝 모델을 통한 결과 측정
-    # pred = model_predict_value(img)
-
-    # 이미지 출력
-    # cv.imwrite(r'E:\Output_test\output.jpg', img)
-    # message(key) , data(value)
-#        return HttpResponse(json.dumps({'paths': data}), 'application/json')
-    return render(request, 'photo/predict.html', {'photos': photos})
-
-
-def ajaxTest(request):
-
+    print("function called 0")
     if request.is_ajax():
-
+        print("function called 1")
         data = request.GET['click']
-        print(data)
-        # sth function
-        # ex print_hello
-
-        # 이미지 입력
-        # 이미지의 URL로 입력 받음
-        # img = cv.imread(r'E:\Input_test\test.jpg')
-
-        # 딥러닝 모델을 통한 결과 측정
-        # pred = model_predict_value(img)
-
-        # 이미지 출력
-        # cv.imwrite(r'E:\Output_test\output.jpg', img)
-        # message(key) , data(value)
         return HttpResponse(json.dumps({'paths': data}), 'application/json')
-
-    return render(request, 'diagnosis.html')
+    return render(request, 'photo/predict.html', {'photos': photos})
