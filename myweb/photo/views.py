@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 import json
 
+from . import Detection
 from .models import Photo
 import cv2 as cv
 from PIL import Image
@@ -73,9 +74,21 @@ class PhotoPredictView(DetailView):  # DetailView 를 PhotoPredict에 상속받�
 
 def output_view(request, pk):
     photos = Photo.objects.get(pk=pk)  # 데이터베이스에 저장 된 모든 사진을 불러온다.
-    print("function called 0")
     if request.is_ajax():
-        print("function called 1")
-        data = request.GET['click']
-        return HttpResponse(json.dumps({'paths': data}), 'application/json')
+        print('Detection...')
+        Photo_url = request.GET['Photo_url']
+        Save_path = request.GET['Save_path']
+        print('photo url : ', Photo_url)
+        print('Save_path : ', Save_path)
+        # 이미지 경로에서 /가 계속 빠짐
+        # --> custom templates tag로 해결!
+        img = cv.imread(Photo_url)
+        #cv.imshow('test', img)
+        # cv.waitKey()
+        # cv.destroyAllWindows()
+        model = Detection.setup()
+        Detection.result(Photo_url, Save_path)
+
+        print("Done")
+        return HttpResponse(json.dumps({'paths': Photo_url}), 'application/json')
     return render(request, 'photo/predict.html', {'photos': photos})

@@ -12,9 +12,9 @@
     <div class="col-md-8 panel panel-default">
         <!--이미지 출력및 Description 출력-->
         <p><img src="{{object.photo.url}}" alt="No image" style="width:50%;"></p>
-        <p>{{items.value}}</p>
         <p>{{object.photo.url}}</p>
-        <p>{{object.text|linebreaksbr}}</p>
+        <p>{{object.text}}</p>
+        <p>{{object.created}}</p>
         <!-- HTML은 기본적으로 공백문자를 인식하지 못하는데 linebreaksbr 필터를 사용하면 줄바꿈이 일어나는 곳에 <br> 태그를 추가! -->
         <!-- 'photo:photo_update' = urls.photo_update 함수와 연결 -->
         <!--Delete 버튼-->
@@ -22,12 +22,14 @@
             Delete
         </a>
         <!--Update 버튼-->
+        <!--
         <a href="{% url 'photo:photo_update' pk=object.id %}" class="btn btn-outline-danger btn-sm float-right">
             Update
         </a>
+        -->
         <!--Predict 버튼-->
-        <a href="{% url 'photo:photo_predict' pk=object.id %}" class="btn btn-outline-danger btn-sm float-right">
-            Predict
+        <a href="{% url 'photo:photo_predict' pk=object.id %}" class="btn btn-outline-primary btn-sm float-right">
+            Predict page
         </a>
 
 

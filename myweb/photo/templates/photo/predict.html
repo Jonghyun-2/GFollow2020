@@ -7,53 +7,54 @@
     <div class="col-md-8 panel panel-default">
         <p>Input Image</p>
         <p><img src="{{photos.photo.url}}" id="img_url" alt="No image" style="width:50%;"></p>
-        <input type='button' id="SaveImg" value="Save Img" class="btn btn-outline-primary btn-sm float-right">
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Save Path </span>
+            </div>
+            <input type="text" id="SavePath" class="form-control" aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm">
+            <input type='button' id="SaveImg" value="Run & Save" class="btn btn-outline-primary btn-sm float-right">
+        </div>
+
 
     </div>
     <div class="col-md-2"></div>
 </div>
 {% endblock%}
-
 {% block items %}
 <div id="text_area">
-    <h1>Test Page</h1>
-    <p>{{photos.photo.url}}</p>
-    <p>{{photos.pk}}</p>
+    {% load addslash %}
 </div>
 {% endblock%}
 
 {% block head %}
 <script type="text/javascript">
+    var Photo_url = "{{photos.photo.path|addslash}}";
     //click 이벤트 발생시, id_a 영역에 function(void) 실행
     $(document).on("click", "#SaveImg", function () { //만약 ID를 통해 불러오고 싶으면?
         //변수 선언
         var c_data = {};
-        var url_path = "{{photos.photo.url}}";
-        //c_data의 click event는 'a'의 value를 가짐
-        c_data['click'] = 'a';
 
+
+        //c_data의 click event는 'a'의 value를 가짐
+        c_data['Photo_url'] = Photo_url;
+        c_data['Save_path'] = document.getElementById('SavePath').value;
         $.ajax({
             //type : 'GET','POST', 'DELETE', 'PUT'
             type: 'GET',
             //url: ".",
-            // dataType: "json",
+            dataType: "text",
             data: c_data,
 
             success: function () {
-                alert('success');
-                alert(url_path);
+                alert('Done \nSave path : ' + c_data['Save_path']);
             },
             error: function (request, status, error) {
                 alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
                 alert("error:" + error);
 
             },
-        }).done(function (msg) { // 완료시 작동되는 function (a)는 request를 통해 들어온 Data
-
-            $("#text_area").append("done : " + msg['paths'] + "<_br />");
-
-        });
-
+        })
     });
 </script>
 {% endblock%}
